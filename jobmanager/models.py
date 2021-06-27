@@ -14,9 +14,10 @@ class Job(models.Model):
         default="none",
         choices=(("none", "none"), ("ok", "ok"), ("error", "error")),
     )
+    run_count = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{self.name} {self.id} {self.state} {self.status}"
+        return f"{self.name} {self.id} {self.state} {self.status} {self.run_count}"
 
     def run(self):
         from jobmanager.tasks import run_job
@@ -35,7 +36,15 @@ class Job(models.Model):
             self.status = "error"
         finally:
             self.state = "done"
+            self.run_count += 1
             self.save()
 
     def job_status(self):
         pass
+
+
+class JobRun(models.Model):
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.job.id}"

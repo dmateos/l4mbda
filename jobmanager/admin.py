@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Job
+from .models import Job, JobRun
 
 
 def run_job(modeladmin, request, queryset):
@@ -12,3 +12,4 @@ class JobAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Job, JobAdmin)
+admin.site.register(JobRun)
