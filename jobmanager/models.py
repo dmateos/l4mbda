@@ -17,4 +17,5 @@ class Job(models.Model):
     )
 
     def run(self):
-        run_job.delay(self.code)
+        if self.state == "not_run":
+            run_job.delay(self.code)
