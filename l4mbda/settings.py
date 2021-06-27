@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-qihv=pd1b&n1hw43z9vhp_o%q36!c6$e(g8onfzc5_hjrt4%a6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["dev1.mateos.lan"]
 
 
 # Application definition

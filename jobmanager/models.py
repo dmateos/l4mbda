@@ -1,5 +1,4 @@
 from django.db import models
-from jobmanager.tasks import run_job
 
 
 class Job(models.Model):
@@ -17,9 +16,10 @@ class Job(models.Model):
     )
 
     def run(self):
-        if self.state == "not_run":
-            result = run_job.delay(self)
-            print(result)
+        from jobmanager.tasks import run_job
+
+        if self.state == "not-run":
+            run_job.delay(self.id)
             return True
         return False
 
