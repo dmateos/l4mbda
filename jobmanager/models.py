@@ -21,19 +21,14 @@ class Job(models.Model):
         state.save()
 
         try:
-            state.state = "running"
-            state.save()
-
+            state.set_state("running")
             exec(self.code)
 
-            state.status = "ok"
-            state.save()
+            state.set_status("ok")
         except Exception:
-            state.status = "error"
-            state.save()
+            state.set_status("error")
         finally:
-            state.state = "done"
-            state.save()
+            state.set_state("done")
             pass
 
 
@@ -54,3 +49,11 @@ class JobRun(models.Model):
 
     def __str__(self):
         return f"{self.job.id} {self.state} {self.status}"
+
+    def set_state(self, state):
+        self.state = state
+        self.save()
+
+    def set_status(self, status):
+        self.status = status
+        self.save()
