@@ -26,9 +26,7 @@ class Job(models.Model):
             state.set_status("ok")
         except Exception as e:
             state.set_status("error")
-
-            state.job_message = str(e)
-            state.save()
+            state.set_job_message(str(e))
         finally:
             state.set_state("done")
             pass
@@ -59,4 +57,8 @@ class JobRun(models.Model):
 
     def set_status(self, status):
         self.status = status
+        self.save()
+
+    def set_job_message(self, message):
+        self.job_message = message
         self.save()

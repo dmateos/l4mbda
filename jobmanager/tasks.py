@@ -22,8 +22,8 @@ bootstrap_django()
 app = build_app()
 
 
-@app.task
-def run_job(job_id):
+@app.task(bind=True)
+def run_job(self, job_id):
     from jobmanager.models import Job
 
     job_model = Job.objects.get(pk=job_id)
