@@ -18,17 +18,15 @@ class Job(models.Model):
     def run(self):
         from jobmanager.tasks import run_job
 
-        if self.state == "not-run":
-            run_job.delay(self.id)
-            return True
-        return False
+        run_job.delay(self.id)
+        return True
 
     def run_main(self):
         self.state = "running"
         self.save()
 
         print(self.code)
-        eval(self.code)
+        exec(self.code)
 
         self.state = "done"
         self.save()
