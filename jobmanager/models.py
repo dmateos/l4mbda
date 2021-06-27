@@ -1,5 +1,5 @@
 from django.db import models
-from .tasks import run_job
+from jobmanager.tasks import run_job
 
 
 class Job(models.Model):

@@ -3,7 +3,7 @@ from l4mbda import settings
 
 
 def build_app():
-    redis = "redis://{0}@{1}".format(
+    redis = "redis://:{0}@{1}".format(
         settings.REDIS["default"]["PASSWORD"], settings.REDIS["default"]["HOST"]
     )
     return Celery("tasks", backend=redis, broker=redis)
