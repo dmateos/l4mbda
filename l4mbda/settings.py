@@ -79,7 +79,7 @@ WSGI_APPLICATION = "l4mbda.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": os.environ.get("MYSQL_DBNAME"),
+        "NAME": os.environ.get("MYSQL_NAME"),
         "HOST": os.environ.get("MYSQL_HOST"),
         "USER": os.environ.get("MYSQL_USER"),
         "PASSWORD": os.environ.get("MYSQL_PASSWORD"),
