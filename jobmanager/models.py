@@ -18,7 +18,17 @@ class Job(models.Model):
 
     def run(self):
         if self.state == "not_run":
-            result = run_job.delay(self.code, self)
+            result = run_job.delay(self)
             print(result)
             return True
         return False
+
+    def run_main(self):
+        self.state = "running"
+        self.save()
+
+        print(self.code)
+        eval(self.code)
+
+        self.state = "done"
+        self.save()
