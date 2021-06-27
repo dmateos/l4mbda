@@ -25,7 +25,6 @@ class Job(models.Model):
         self.state = "running"
         self.save()
 
-        print(self.code)
         exec(self.code)
 
         self.state = "done"

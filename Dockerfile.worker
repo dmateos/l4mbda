@@ -15,4 +15,4 @@ EXPOSE 8080
 
 # Dont bother to change this line.
 # This is overridden by the azure runner of the container on deployment.
-CMD ["/app/worker_start.sh"]
+CMD "/app/worker_start.sh"
