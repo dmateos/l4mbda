@@ -23,10 +23,12 @@ class Job(models.Model):
         try:
             state.set_state("running")
             exec(self.code)
-
             state.set_status("ok")
-        except Exception:
+        except Exception as e:
             state.set_status("error")
+
+            state.job_message = str(e)
+            state.save()
         finally:
             state.set_state("done")
             pass
@@ -34,6 +36,7 @@ class Job(models.Model):
 
 class JobRun(models.Model):
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    job_message = models.TextField(default="")
 
     state = models.CharField(
         max_length=16,
