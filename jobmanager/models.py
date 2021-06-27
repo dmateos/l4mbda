@@ -1,6 +1,5 @@
 from django.db import models
-
-# Create your models here.
+from tasks import run_job
 
 
 class Job(models.Model):
@@ -16,3 +15,6 @@ class Job(models.Model):
         default="none",
         choices=(("none", "none"), ("ok", "ok"), ("error", "error")),
     )
+
+    def run(self):
+        run_job.delay(self.code)
