@@ -1,7 +1,14 @@
-# Create your tests here.
-def test_something():
-    assert True
+class TestJobModel:
+    def test_something(self):
+        assert True
 
 
-def test_something_else():
-    assert False
+class TestJobRunModel:
+    def test_sets_and_saves_state(self):
+        assert True
+
+    def test_sets_and_save_status(self):
+        assert True
+
+    def test_sets_and_saves_job_message(self):
+        assert True
