@@ -2,7 +2,15 @@
 
 {% block content %}
   {% for job in object_list %}
-    {{ job.name }}
+    <div class="card" style="width: 50rem;">
+      <div class="card-body">
+        <h5 class="card-title">{{job.name}}</h5>
+        <p class="card-text"> Times to run: {{job.times_to_run}}</p>
+        <p class="card-text">
+          <pre>{{job.code}}</pre>
+        </p>
+        <a href="/runjob/{{job.id}}" class="btn btn-primary">Run job</a>
+      </div>
+    </div>
   {% endfor %}
 {% endblock %}
-
