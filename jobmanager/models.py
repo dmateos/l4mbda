@@ -67,5 +67,5 @@ class JobRun(models.Model):
 class JobInput(models.Model):
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
 
-    def _str__(self):
+    def __str__(self):
         return f"{self.job.id}"
