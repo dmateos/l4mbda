@@ -3,6 +3,12 @@ from unittest.mock import patch
 from .models import Job, JobRun
 
 
+class TestRunJobView(django.test.TestCase):
+    def test_view_thing(self):
+        request = self.client.get("/runjob")
+        print(request)
+
+
 class TestJobModel(django.test.TestCase):
     @patch("builtins.exec")
     def test_job_run_main_runs_ok(self, mock_exec):
