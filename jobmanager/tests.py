@@ -1,9 +1,12 @@
-class TestJobModel:
+import django.test
+
+
+class TestJobModel(django.test.TestCase):
     def test_something(self):
         assert True
 
 
-class TestJobRunModel:
+class TestJobRunModel(django.tests.TestCase):
     def test_sets_and_saves_state(self):
         assert True
 
