@@ -12,13 +12,12 @@ class Job(models.Model):
     def run(self):
         from jobmanager.tasks import run_job
 
-        for n in range(0, self.times_to_run):
+        for _ in range(0, self.times_to_run):
             run_job.delay(self.id)
         return True
 
     def run_main(self):
-        state = JobRun(job=self)
-        state.save()
+        state = JobRun.objects.create(job=self)
 
         try:
             state.set_state("running")
@@ -29,7 +28,6 @@ class Job(models.Model):
             state.set_job_message(str(e))
         finally:
             state.set_state("done")
-            pass
 
 
 class JobRun(models.Model):
