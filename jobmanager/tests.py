@@ -17,10 +17,10 @@ class TestJobModel(django.test.TestCase):
 
         mock_exec.assert_called_with("hello world")
         assert mock_exec.call_count == 1
+        assert job.jobrun_set.count() == 1
         for runs in job.jobrun_set.all():
             assert runs.state == "done"
             assert runs.status == "ok"
-        assert job.jobrun_set.count() == 1
 
     @patch("builtins.exec")
     def test_job_run_main_errors(self, mock_exec):
@@ -37,15 +37,15 @@ class TestJobModel(django.test.TestCase):
     @patch("builtins.exec")
     def test_job_run_main_runs_multiple(self, mock_exec):
         job = Job.objects.create(code="hello world")
-        job.run_main()
-        job.run_main()
+        for n in range(0, 2):
+            job.run_main()
 
         mock_exec.assert_called_with("hello world")
         assert mock_exec.call_count == 2
+        assert job.jobrun_set.count() == 2
         for runs in job.jobrun_set.all():
             assert runs.state == "done"
             assert runs.status == "ok"
-        assert job.jobrun_set.count() == 2
 
     @patch("jobmanager.tasks.run_job")
     def test_job_run(self, mock_run):

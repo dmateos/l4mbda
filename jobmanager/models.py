@@ -62,3 +62,10 @@ class JobRun(models.Model):
     def set_job_message(self, message):
         self.job_message = message
         self.save()
+
+
+class JobInput(models.Model):
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+
+    def _str__(self):
+        return f"{self.job.id}"
